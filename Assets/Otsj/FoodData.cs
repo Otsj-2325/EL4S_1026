@@ -26,8 +26,6 @@ public class FooDatad : MonoBehaviour
 
     #region 処理変数
     private SpriteRenderer sprender;
-    private Sum_Meal summeal;
-    private Result_Meal result;
 
     #endregion
 
@@ -44,12 +42,12 @@ public class FooDatad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        summeal.PlusCalorie(calorie);
-        summeal.PlusMealName(foodName);
+        sum_meal_manager.Instance.PlusCalorie(calorie);
+        sum_meal_manager.Instance.PlusMealName(foodName);
 
 
-        print("Calorie : " + result.GetScore());
-        print("Name : " + result.GetMealName());
+        print("Calorie : " + sum_meal_manager.Instance.GetScore());
+        print("Name : " + sum_meal_manager.Instance.GetMealName());
 
     }
 }
