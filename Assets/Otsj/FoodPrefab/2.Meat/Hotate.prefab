@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf39bedd92217148acced66c8882bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: "\u30DD\u30C6\u30C8"
+  foodName: "\u307B\u305F\u3066"
   texture: {fileID: 21300000, guid: 858ab597bdd163e4d81a0421e74f494a, type: 3}
-  calorie: 100
+  calorie: 66
+  kind: 2

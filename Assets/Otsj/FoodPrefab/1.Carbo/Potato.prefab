@@ -163,4 +163,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: "\u30DD\u30C6\u30C8"
   texture: {fileID: 21300000, guid: 3bff4e8fb9ceead4dba9b0982d9f394e, type: 3}
-  calorie: 100
+  calorie: 59
+  kind: 3
