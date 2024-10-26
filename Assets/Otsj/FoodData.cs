@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 [RequireComponent(typeof(SpriteRenderer))]
 
 public class Food : MonoBehaviour
