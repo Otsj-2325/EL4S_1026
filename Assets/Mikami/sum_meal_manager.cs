@@ -65,7 +65,7 @@ public sealed class sum_meal_manager : MonoBehaviour
 
     public void PlusMeal(int kinds, string name)
     {
-        meal_name = name + "“ç";
+        meal_name = name;
         PlusMeal(kinds);
     }
 
@@ -76,7 +76,7 @@ public sealed class sum_meal_manager : MonoBehaviour
         return score;
     }
 
-    public string GetMealName()
+    public string[] GetMealName()
     {
         int max_ratio = Mathf.Max(vegetable_num, meat_num, cereal_num);
         string adjective = "";
@@ -132,7 +132,8 @@ public sealed class sum_meal_manager : MonoBehaviour
                 }
             }
 
-            return adjective + meal_name;
+            string[] meal_names = { adjective, meal_name, "“ç"};
+            return meal_names;
         }
         else if(max_ratio == meat_num)
         {
@@ -177,7 +178,8 @@ public sealed class sum_meal_manager : MonoBehaviour
                     adjective += "‹ï‚¾‚­‚³‚ñ";
                 }
             }
-            return adjective + meal_name;
+            string[] meal_names = { adjective, meal_name, "“ç" };
+            return meal_names;
         }
         else
         {
@@ -222,7 +224,8 @@ public sealed class sum_meal_manager : MonoBehaviour
                     adjective += "‹ï‚¾‚­‚³‚ñ";
                 }
             }
-            return adjective + meal_name;
+            string[] meal_names = { adjective, meal_name, "“ç" };
+            return meal_names;
         }
     }
 }
