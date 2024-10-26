@@ -42,12 +42,14 @@ public class FooDatad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void Cooking()
+    {
         sum_meal_manager.Instance.PlusCalorie(calorie);
         sum_meal_manager.Instance.PlusMealName(foodName);
 
-
-        print("Calorie : " + sum_meal_manager.Instance.GetScore());
-        print("Name : " + sum_meal_manager.Instance.GetMealName());
-
+        print("鍋に投入 : " + gameObject.name);
     }
+
 }
