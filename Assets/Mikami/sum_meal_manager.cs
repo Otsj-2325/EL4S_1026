@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ƒ^ƒCƒgƒ‹‚Åƒ}ƒl[ƒWƒƒ[‚ÌƒIƒuƒWƒFƒNƒg¶¬‚¨Šè‚¢‚µ‚Ü‚·
+//ã‚¿ã‚¤ãƒˆãƒ«ã§ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”ŸæˆãŠé¡˜ã„ã—ã¾ã™
 
 public sealed class sum_meal_manager : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public sealed class sum_meal_manager : MonoBehaviour
 
     [SerializeField] public static float calorie_goal;
     public static float calorie_sum = 0.0f;
-    public static string meal_name = "“ç";
+    public static string meal_name = "é‹";
     public static int meat_num = 0;
     public static int vegetable_num = 0;
     public static int cereal_num = 0;
@@ -19,7 +19,7 @@ public sealed class sum_meal_manager : MonoBehaviour
 
     private void Awake()
     {
-        // instance‚ª‚·‚Å‚É‚ ‚Á‚½‚ç©•ª‚ğÁ‹‚·‚éB
+        // instanceãŒã™ã§ã«ã‚ã£ãŸã‚‰è‡ªåˆ†ã‚’æ¶ˆå»ã™ã‚‹ã€‚
         if (instance && this != instance)
         {
             Destroy(this.gameObject);
@@ -27,14 +27,14 @@ public sealed class sum_meal_manager : MonoBehaviour
 
         instance = this;
 
-        // Scene‘JˆÚ‚Å”jŠü‚³‚ê‚È‚æ‚¤‚É‚·‚éB      
+        // Sceneé·ç§»ã§ç ´æ£„ã•ã‚Œãªã‚ˆã†ã«ã™ã‚‹ã€‚      
         DontDestroyOnLoad(this);
     }
 
     public void InitMeal()
     {
         calorie_sum = 0.0f;
-        meal_name = "“ç";
+        meal_name = "é‹";
         meat_num = 0;
         vegetable_num = 0;
         cereal_num = 0;
@@ -65,7 +65,7 @@ public sealed class sum_meal_manager : MonoBehaviour
 
     public void PlusMeal(int kinds, string name)
     {
-        meal_name = name + "“ç";
+        meal_name = name;
         PlusMeal(kinds);
     }
 
@@ -76,7 +76,7 @@ public sealed class sum_meal_manager : MonoBehaviour
         return score;
     }
 
-    public string GetMealName()
+    public string[] GetMealName()
     {
         int max_ratio = Mathf.Max(vegetable_num, meat_num, cereal_num);
         string adjective = "";
@@ -84,145 +84,149 @@ public sealed class sum_meal_manager : MonoBehaviour
         {
             if(0.7f <= cereal_num / meal_num)
             {
-                adjective += "ƒ{ƒŠƒ…[ƒ€MAXII";
+                adjective += "ãƒœãƒªãƒ¥ãƒ¼ãƒ MAXï¼ï¼";
             }
             else if (0.5f <= cereal_num / meal_num)
             {
-                adjective += "ƒ{ƒŠƒ…[ƒ€‚½‚Á‚Õ‚è";
+                adjective += "ãƒœãƒªãƒ¥ãƒ¼ãƒ ãŸã£ã·ã‚Š";
             }
 
             if (meat_num >= vegetable_num)
             {
                 if (0.3f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷‚²‚ë‚²‚ë";
+                    adjective += "ãŠè‚‰ã”ã‚ã”ã‚";
                 }
                 else if (0.2f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷“ü‚è";
+                    adjective += "ãŠè‚‰å…¥ã‚Š";
                 }
 
                 if (0.3f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ‚Ì“ü‚Á‚½";
+                    adjective += "é‡èœã®å…¥ã£ãŸ";
                 }
                 else if (0.2f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ“ü‚è";
+                    adjective += "é‡èœå…¥ã‚Š";
                 }
             }
             else
             {
                 if (0.3f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ‚Ì“ü‚Á‚½";
+                    adjective += "é‡èœã®å…¥ã£ãŸ";
                 }
                 else if (0.2f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ“ü‚è";
+                    adjective += "é‡èœå…¥ã‚Š";
                 }
 
                 if (0.3f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷‚²‚ë‚²‚ë";
+                    adjective += "ãŠè‚‰ã”ã‚ã”ã‚";
                 }
                 else if (0.2f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷“ü‚è";
+                    adjective += "ãŠè‚‰å…¥ã‚Š";
                 }
             }
 
-            return adjective + meal_name;
+            string[] meal_names = { adjective, meal_name, "é‹"};
+            return meal_names;
         }
         else if(max_ratio == meat_num)
         {
             if (0.7f <= cereal_num / meal_num)
             {
-                adjective += "ƒXƒ^ƒ~ƒi–“_II";
+                adjective += "ã‚¹ã‚¿ãƒŸãƒŠæº€ç‚¹ï¼ï¼";
             }
             else if (0.5f <= cereal_num / meal_num)
             {
-                adjective += "‚¨“÷‚¢‚Á‚Ï‚¢";
+                adjective += "ãŠè‚‰ã„ã£ã±ã„";
             }
 
             if(cereal_num >= vegetable_num)
             {
                 if (0.3f <= cereal_num / meal_num)
                 {
-                    adjective += "‹ï‚¾‚­‚³‚ñ";
+                    adjective += "å…·ã ãã•ã‚“";
                 }
 
                 if (0.3f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ‚Ì“ü‚Á‚½";
+                    adjective += "é‡èœã®å…¥ã£ãŸ";
                 }
                 else if (0.2f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ“ü‚è";
+                    adjective += "é‡èœå…¥ã‚Š";
                 }
             }
             else
             {
                 if (0.3f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ‚Ì“ü‚Á‚½";
+                    adjective += "é‡èœã®å…¥ã£ãŸ";
                 }
                 else if (0.2f <= vegetable_num / meal_num)
                 {
-                    adjective += "–ìØ“ü‚è";
+                    adjective += "é‡èœå…¥ã‚Š";
                 }
 
                 if (0.3f <= cereal_num / meal_num)
                 {
-                    adjective += "‹ï‚¾‚­‚³‚ñ";
+                    adjective += "å…·ã ãã•ã‚“";
                 }
             }
-            return adjective + meal_name;
+            string[] meal_names = { adjective, meal_name, "é‹" };
+            return meal_names;
         }
         else
         {
             if (0.7f <= cereal_num / meal_num)
             {
-                adjective += "–ìØ‚Ì|–¡ˆì‚ê‚é";
+                adjective += "é‡èœã®æ—¨å‘³æº¢ã‚Œã‚‹";
             }
             else if (0.5f <= cereal_num / meal_num)
             {
-                adjective += "–ìØ‚½‚Á‚Õ‚è";
+                adjective += "é‡èœãŸã£ã·ã‚Š";
             }
 
             if (cereal_num >= meat_num)
             {
                 if (0.3f <= cereal_num / meal_num)
                 {
-                    adjective += "‹ï‚¾‚­‚³‚ñ";
+                    adjective += "å…·ã ãã•ã‚“";
                 }
 
                 if (0.3f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷‚²‚ë‚²‚ë";
+                    adjective += "ãŠè‚‰ã”ã‚ã”ã‚";
                 }
                 else if (0.2f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷“ü‚è";
+                    adjective += "ãŠè‚‰å…¥ã‚Š";
                 }
             }
             else
             {
                 if (0.3f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷‚²‚ë‚²‚ë";
+                    adjective += "ãŠè‚‰ã”ã‚ã”ã‚";
                 }
                 else if (0.2f <= meat_num / meal_num)
                 {
-                    adjective += "‚¨“÷“ü‚è";
+                    adjective += "ãŠè‚‰å…¥ã‚Š";
                 }
 
                 if (0.3f <= cereal_num / meal_num)
                 {
-                    adjective += "‹ï‚¾‚­‚³‚ñ";
+                    adjective += "å…·ã ãã•ã‚“";
                 }
             }
-            return adjective + meal_name;
+            
+            string[] meal_names = { adjective, meal_name, "é‹" };
+            return meal_names;
         }
     }
 }
