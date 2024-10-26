@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using KanKikuchi;
-using KanKikuchi.AudioManager;
-
 
 
 namespace Nomura
@@ -17,19 +14,12 @@ namespace Nomura
 
 
 		/// <summary>
-		/// ﾆ致ﾆ鍛ﾆ歎ﾆ停ｦﾅｽﾃﾂ行
+		/// プッシュ実行
 		/// </summary>
 		public void Push()
 		{
-
-			if (_collisionObj != null)
-			{
-				Destroy(_collisionObj);
-				_collisionObj = null;
-
-				SEManager.Instance.Play(SEPath.PUSH, 0.5f);
-			}
-
+			Destroy(_collisionObj);
+			_collisionObj = null;
 		}
 
 
