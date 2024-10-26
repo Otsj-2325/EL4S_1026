@@ -12,6 +12,10 @@ public sealed class sum_meal_manager : MonoBehaviour
     [SerializeField] public static float calorie_goal;
     public static float calorie_sum = 0.0f;
     public static string meal_name = "鍋";
+    public static int meat_num = 0;
+    public static int vegetable_num = 0;
+    public static int cereal_num = 0;
+    public static int meal_num = 0;
 
     private void Awake()
     {
@@ -31,6 +35,10 @@ public sealed class sum_meal_manager : MonoBehaviour
     {
         calorie_sum = 0.0f;
         meal_name = "鍋";
+        meat_num = 0;
+        vegetable_num = 0;
+        cereal_num = 0;
+        meal_num = 0;
     }
 
     public void PlusCalorie(float cal)
@@ -38,9 +46,27 @@ public sealed class sum_meal_manager : MonoBehaviour
         calorie_sum += cal;
     }
 
-    public void PlusMealName(string name)
+    public void PlusMeal(int kinds)
     {
-        meal_name = name + meal_name;
+        switch (kinds)
+        {
+            case 1:
+                vegetable_num++;
+                break;
+            case 2:
+                meat_num++;
+                break;
+            case 3:
+                cereal_num++;
+                break;
+        }
+        meal_num++;
+    }
+
+    public void PlusMeal(int kinds, string name)
+    {
+        meal_name = name + "鍋";
+        PlusMeal(kinds);
     }
 
     public int GetScore()
@@ -52,50 +78,151 @@ public sealed class sum_meal_manager : MonoBehaviour
 
     public string GetMealName()
     {
-        return meal_name;
+        int max_ratio = Mathf.Max(vegetable_num, meat_num, cereal_num);
+        string adjective = "";
+        if (max_ratio == cereal_num)
+        {
+            if(0.7f <= cereal_num / meal_num)
+            {
+                adjective += "ボリュームMAX！！";
+            }
+            else if (0.5f <= cereal_num / meal_num)
+            {
+                adjective += "ボリュームたっぷり";
+            }
+
+            if (meat_num >= vegetable_num)
+            {
+                if (0.3f <= meat_num / meal_num)
+                {
+                    adjective += "お肉ごろごろ";
+                }
+                else if (0.2f <= meat_num / meal_num)
+                {
+                    adjective += "お肉入り";
+                }
+
+                if (0.3f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜の入った";
+                }
+                else if (0.2f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜入り";
+                }
+            }
+            else
+            {
+                if (0.3f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜の入った";
+                }
+                else if (0.2f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜入り";
+                }
+
+                if (0.3f <= meat_num / meal_num)
+                {
+                    adjective += "お肉ごろごろ";
+                }
+                else if (0.2f <= meat_num / meal_num)
+                {
+                    adjective += "お肉入り";
+                }
+            }
+
+            return adjective + meal_name;
+        }
+        else if(max_ratio == meat_num)
+        {
+            if (0.7f <= cereal_num / meal_num)
+            {
+                adjective += "スタミナ満点！！";
+            }
+            else if (0.5f <= cereal_num / meal_num)
+            {
+                adjective += "お肉いっぱい";
+            }
+
+            if(cereal_num >= vegetable_num)
+            {
+                if (0.3f <= cereal_num / meal_num)
+                {
+                    adjective += "具だくさん";
+                }
+
+                if (0.3f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜の入った";
+                }
+                else if (0.2f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜入り";
+                }
+            }
+            else
+            {
+                if (0.3f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜の入った";
+                }
+                else if (0.2f <= vegetable_num / meal_num)
+                {
+                    adjective += "野菜入り";
+                }
+
+                if (0.3f <= cereal_num / meal_num)
+                {
+                    adjective += "具だくさん";
+                }
+            }
+            return adjective + meal_name;
+        }
+        else
+        {
+            if (0.7f <= cereal_num / meal_num)
+            {
+                adjective += "野菜の旨味溢れる";
+            }
+            else if (0.5f <= cereal_num / meal_num)
+            {
+                adjective += "野菜たっぷり";
+            }
+
+            if (cereal_num >= meat_num)
+            {
+                if (0.3f <= cereal_num / meal_num)
+                {
+                    adjective += "具だくさん";
+                }
+
+                if (0.3f <= meat_num / meal_num)
+                {
+                    adjective += "お肉ごろごろ";
+                }
+                else if (0.2f <= meat_num / meal_num)
+                {
+                    adjective += "お肉入り";
+                }
+            }
+            else
+            {
+                if (0.3f <= meat_num / meal_num)
+                {
+                    adjective += "お肉ごろごろ";
+                }
+                else if (0.2f <= meat_num / meal_num)
+                {
+                    adjective += "お肉入り";
+                }
+
+                if (0.3f <= cereal_num / meal_num)
+                {
+                    adjective += "具だくさん";
+                }
+            }
+            return adjective + meal_name;
+        }
     }
 }
-
-//public class Title_Meal
-//{
-//    public void InitMeal()
-//    {
-//        sum_meal_manager.calorie_sum = 0.0f;
-//        sum_meal_manager.meal_name = "鍋";
-//    }
-//}
-
-//// "GameScene"側
-//public class Sum_Meal
-//{
-//    public void PlusCalorie(float cal)
-//    {
-//        sum_meal_manager.calorie_sum += cal;
-//    }
-//    public void PlusMealName(string name)
-//    {
-//        sum_meal_manager.meal_name = name + sum_meal_manager.meal_name;
-//    }
-//    public int GetScore()
-//    {
-//        int score = 100;
-//        score -= (int)Mathf.Abs((1 - sum_meal_manager.calorie_sum / sum_meal_manager.calorie_goal) * 100);
-//        return score;
-//    }
-//}
-
-//// "ResultScene"側
-//public class Result_Meal
-//{
-//    public int GetScore()
-//    {
-//        int score = 100;
-//        score -= (int)Mathf.Abs((1 - sum_meal_manager.calorie_sum / sum_meal_manager.calorie_goal) * 100);
-//        return score;
-//    }
-
-//    public string GetMealName()
-//    {
-//        return sum_meal_manager.meal_name;
-//    }
-//}
