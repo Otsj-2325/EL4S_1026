@@ -6,6 +6,7 @@ using KanKikuchi;
 using KanKikuchi.AudioManager;
 
 
+
 namespace Nomura
 {
 	public class Pusher : MonoBehaviour
@@ -16,10 +17,11 @@ namespace Nomura
 
 
 		/// <summary>
-		/// プッシュ実行
+		/// ﾆ致ﾆ鍛ﾆ歎ﾆ停ｦﾅｽﾃﾂ行
 		/// </summary>
 		public void Push()
 		{
+
 			if (_collisionObj != null)
 			{
 				Destroy(_collisionObj);
@@ -27,6 +29,7 @@ namespace Nomura
 
 				SEManager.Instance.Play(SEPath.PUSH, 0.5f);
 			}
+
 		}
 
 

@@ -1,37 +1,41 @@
+
 using System.Collections;
 using UnityEngine;
 using KanKikuchi;
 using KanKikuchi.AudioManager;
 
+
 namespace Nomura
 {
 	/// <summary>
-	/// ƒQ[ƒ€ŠÇ—ƒXƒNƒŠƒvƒg
+	/// ã‚²ãƒ¼ãƒ ç®¡ç†ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 	/// </summary>
 	public class GameManager : MonoBehaviour
 	{
 		/// <summary>
-		/// ƒQ[ƒ€ŠJŽn‚Ü‚Å‚ÌŽžŠÔ
+		/// ã‚²ãƒ¼ãƒ é–‹å§‹ã¾ã§ã®æ™‚é–“
 		/// </summary>
-		[SerializeField, Header("ƒQ[ƒ€ŠJŽn‚Ü‚Å‚ÌŽžŠÔ")]
+		[SerializeField, Header("ã‚²ãƒ¼ãƒ é–‹å§‹ã¾ã§ã®æ™‚é–“")]
 		private float _gameStartInterval = 4.0f;
 
 		/// <summary>
-		/// ƒQ[ƒ€ŠJŽnƒtƒ‰ƒO
+
+		/// ã‚²ãƒ¼ãƒ é–‹å§‹ãƒ•ãƒ©ã‚°
 		/// </summary>
 		private bool _isStart = false;
 
 		/// <summary>
-		/// ƒQ[ƒ€I—¹ƒtƒ‰ƒO
+=======
+		/// ã‚²ãƒ¼ãƒ çµ‚äº†ãƒ•ãƒ©ã‚°
 		/// </summary>
 		private bool _isFinished = false;
 
+
 		[SerializeField]
 		private AudioSource _audioSource;
-		
 
 		/// <summary>
-		/// ŠJŽnˆ—
+		/// é–‹å§‹å‡¦ç†
 		/// </summary>
 		private IEnumerator Start()
 		{
@@ -55,6 +59,7 @@ namespace Nomura
 			_isFinished = true;
 			_audioSource.Stop();
 		}
+
 	}
 
 }
