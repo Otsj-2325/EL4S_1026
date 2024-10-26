@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi;
+using KanKikuchi.AudioManager;
+
 
 
 namespace Nomura
@@ -8,9 +11,15 @@ namespace Nomura
 	public class HotPot : MonoBehaviour
 	{
 
+		private void Start()
+		{
+			sum_meal_manager.Instance.InitMeal();
+		}
+
+
 
 		/// <summary>
-		/// “–‚½‚è”»’è
+		/// â€œâ€“â€šÂ½â€šÃ¨â€Â»â€™Ã¨
 		/// </summary>
 		/// <param name="collision"></param>
 		private void OnCollisionEnter2D(Collision2D collision)
@@ -19,10 +28,15 @@ namespace Nomura
 		}
 
 		/// <summary>
-		/// “ç‚Ö“Š“ü
+		/// â€œÃ§â€šÃ–â€œÅ â€œÃ¼
 		/// </summary>
 		private void DropInHotPot(GameObject obj)
 		{
+
+			obj.GetComponent<FooDatad>().Cooking();
+
+			SEManager.Instance.Play(SEPath.HOT_POT, 0.5f);
+
 			Destroy(obj);
 		}
 

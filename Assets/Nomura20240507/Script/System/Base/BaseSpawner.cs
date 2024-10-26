@@ -1,62 +1,79 @@
+
+using System.Collections;
+
 using UnityEngine;
 
 namespace Nomura
 {
 	/// <summary>
-	/// ¶¬Ší‚ÌŠî’êƒNƒ‰ƒXƒXƒNƒŠƒvƒg
+	/// ç”Ÿæˆå™¨ã®åŸºåº•ã‚¯ãƒ©ã‚¹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 	/// </summary>
 	public class BaseSpawner : MonoBehaviour, ISpawner
 	{
 		/// <summary>
-		/// XVˆ—‚ÌŒp‘±ƒtƒ‰ƒO
+		/// æ›´æ–°å‡¦ç†ã®ç¶™ç¶šãƒ•ãƒ©ã‚°
 		/// </summary>
-		[SerializeField, Header("XVˆ—‚ÌŒp‘±ƒtƒ‰ƒO")]
+		[SerializeField, Header("æ›´æ–°å‡¦ç†ã®ç¶™ç¶šãƒ•ãƒ©ã‚°")]
 		private bool _isProcess = true;
 
 		/// <summary>
-		/// ¶¬”ÍˆÍ(‰ºŒÀ)
+		/// ç”Ÿæˆç¯„å›²(ä¸‹é™)
 		/// </summary>
-		[SerializeField, Header("¶¬”ÍˆÍ(‰ºŒÀ)")]
+		[SerializeField, Header("ç”Ÿæˆç¯„å›²(ä¸‹é™)")]
 		private Vector3 _createPosMin;
 		/// <summary>
-		/// ¶¬”ÍˆÍ(ãŒÀ)
+		/// ç”Ÿæˆç¯„å›²(ä¸Šé™)
 		/// </summary>
-		[SerializeField, Header("¶¬”ÍˆÍ(ãŒÀ)")]
+		[SerializeField, Header("ç”Ÿæˆç¯„å›²(ä¸Šé™)")]
 		private Vector3 _createPosMax;
 
 		/// <summary>
-		/// ¶¬ŠÔŠu(•b)
+		/// ç”Ÿæˆé–“éš”(ç§’)
 		/// </summary>
-		[SerializeField, Header("¶¬ŠÔŠu(•b)")]
+		[SerializeField, Header("ç”Ÿæˆé–“éš”(ç§’)")]
 		private float _createInterval = Mathf.Infinity;
 
 		/// <summary>
-		/// Á–ÅŠÔŠu(•b)
+		/// æ¶ˆæ»…é–“éš”(ç§’)
 		/// </summary>
-		[SerializeField, Header("Á–ÅŠÔŠu(•b)")]
+		[SerializeField, Header("æ¶ˆæ»…é–“éš”(ç§’)")]
 		private float _destroyInterval = 1.0f;
 
 		/// <summary>
-		/// ¶¬ãŒÀ
+		/// ç”Ÿæˆä¸Šé™
 		/// </summary>
-		[SerializeField, Header("¶¬ãŒÀ")]
+		[SerializeField, Header("ç”Ÿæˆä¸Šé™")]
 		private float _createLimit = Mathf.Infinity;
 
 		/// <summary>
-		/// ¶¬ƒJƒEƒ“ƒg
+		/// ç”Ÿæˆã‚«ã‚¦ãƒ³ãƒˆ
 		/// </summary>
 		private float _createCount = 0.0f;
 
 
+
+		[SerializeField]
+		private GameManager _gameManager;
+
+		private IEnumerator Start()
+		{
+			bool tempProcess = _isProcess;
+			_isProcess = false;
+
+			yield return new WaitForSeconds(_gameManager.GetStartInterval());
+
+			_isProcess = tempProcess;
+		}
+
 		/// <summary>
-		/// XVˆ—
+		/// æ›´æ–°å‡¦ç†
 		/// </summary>
 		private void Update()
 		{
 			if (_isProcess == false) { return; }
 			if (transform.childCount >=_createLimit) { return; }
 
-			// ƒJƒEƒ“ƒgƒAƒbƒv
+			// ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—
 			_createCount += Time.deltaTime;
 
 			if (_createCount >= _createInterval)
@@ -71,14 +88,14 @@ namespace Nomura
 		}
 
 		/// <summary>
-		/// ƒIƒuƒWƒFƒNƒg¶¬
+		/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
 		/// </summary>
-		/// <param name="createPos">¶¬À•W</param>
-		/// <returns>¶¬‚µ‚½ƒIƒuƒWƒFƒNƒg</returns>
+		/// <param name="createPos">ç”Ÿæˆåº§æ¨™</param>
+		/// <returns>ç”Ÿæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
 		public virtual GameObject CreateObject(Vector3 createPos){ return null; }
 
 		/// <summary>
-		/// ‘SƒIƒuƒWƒFƒNƒgíœ
+		/// å…¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå‰Šé™¤
 		/// </summary>
 		public void DestroyAll()
 		{
@@ -93,7 +110,7 @@ namespace Nomura
 		}
 
 		/// <summary>
-		/// ÅŒã”öƒIƒuƒWƒFƒNƒgíœ
+		/// æœ€å¾Œå°¾ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå‰Šé™¤
 		/// </summary>
 		public void DestroyEnd()
 		{
@@ -104,9 +121,9 @@ namespace Nomura
 
 
 		/// <summary>
-		/// ¶¬ŠÔŠu‚Ìİ’è
+		/// ç”Ÿæˆé–“éš”ã®è¨­å®š
 		/// </summary>
-		/// <param name="interval">¶¬ŠÔŠu</param>
+		/// <param name="interval">ç”Ÿæˆé–“éš”</param>
 		public void SetCreateInterval(float interval)
 		{
 			_createInterval = interval;
@@ -114,9 +131,9 @@ namespace Nomura
 		}
 
 		/// <summary>
-		/// ˆ—ó‘Ô‚Ìİ’è
+		/// å‡¦ç†çŠ¶æ…‹ã®è¨­å®š
 		/// </summary>
-		/// <param name="state">ˆ—ó‘Ô</param>
+		/// <param name="state">å‡¦ç†çŠ¶æ…‹</param>
 		public void SetProcess(bool state)
 		{
 			_isProcess = state;
