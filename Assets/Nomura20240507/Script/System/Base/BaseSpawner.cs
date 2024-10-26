@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Nomura
@@ -47,6 +48,19 @@ namespace Nomura
 		/// </summary>
 		private float _createCount = 0.0f;
 
+
+		[SerializeField]
+		private GameManager _gameManager;
+
+		private IEnumerator Start()
+		{
+			bool tempProcess = _isProcess;
+			_isProcess = false;
+
+			yield return new WaitForSeconds(_gameManager.GetStartInterval());
+
+			_isProcess = tempProcess;
+		}
 
 		/// <summary>
 		/// XVˆ—

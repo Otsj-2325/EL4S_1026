@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi;
+using KanKikuchi.AudioManager;
 
 
 namespace Nomura
 {
 	public class HotPot : MonoBehaviour
 	{
+		private void Start()
+		{
+			sum_meal_manager.Instance.InitMeal();
+		}
 
 
 		/// <summary>
@@ -23,6 +29,10 @@ namespace Nomura
 		/// </summary>
 		private void DropInHotPot(GameObject obj)
 		{
+			obj.GetComponent<FooDatad>().Cooking();
+
+			SEManager.Instance.Play(SEPath.HOT_POT, 0.5f);
+
 			Destroy(obj);
 		}
 

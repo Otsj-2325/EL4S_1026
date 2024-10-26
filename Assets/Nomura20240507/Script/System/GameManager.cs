@@ -1,4 +1,7 @@
+using System.Collections;
 using UnityEngine;
+using KanKikuchi;
+using KanKikuchi.AudioManager;
 
 namespace Nomura
 {
@@ -14,52 +17,44 @@ namespace Nomura
 		private float _gameStartInterval = 4.0f;
 
 		/// <summary>
+		/// ゲーム開始フラグ
+		/// </summary>
+		private bool _isStart = false;
+
+		/// <summary>
 		/// ゲーム終了フラグ
 		/// </summary>
 		private bool _isFinished = false;
 
+		[SerializeField]
+		private AudioSource _audioSource;
 		
-		/// <summary>
-		/// 初期化処理
-		/// </summary>
-		private void Awake()
-		{
-			
-		}
 
 		/// <summary>
 		/// 開始処理
 		/// </summary>
-		private void Start()
+		private IEnumerator Start()
 		{
+			_audioSource.Stop();
+			yield return new WaitForSecondsRealtime(_gameStartInterval);
 
+			SEManager.Instance.Play(SEPath.START, 0.5f);
+
+			yield return new WaitForSecondsRealtime(0.5f);
+
+			_audioSource.Play();
 		}
 
-		/// <summary>
-		/// 更新処理
-		/// </summary>
-		private void Update()
+		public float GetStartInterval()
 		{
-			if (_isFinished) { return; }
-
-			// 時間切れ判定
-			CheckFinish();
-			
+			return _gameStartInterval;
 		}
 
-		/// <summary>
-		/// 時間切れ判定
-		/// </summary>
-		private void CheckFinish()
+		public void SetFinish()
 		{
-			if (false)
-			{
-				// 終了処理
-				_isFinished = true;
-			}
-
+			_isFinished = true;
+			_audioSource.Stop();
 		}
-
 	}
 
 }
